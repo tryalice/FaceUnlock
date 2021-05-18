@@ -23,7 +23,8 @@ import java.io.ByteArrayOutputStream;
 public class IdentityService extends Service {
     private boolean busy;
     private ResultReceiver receiver;
-    private final double threshold=70.0;
+    private final double threshold=40.0;
+
     private void takePic() {
         if (!busy) {
             busy = true;
@@ -51,7 +52,7 @@ public class IdentityService extends Service {
         Log.i("IdentityService", "getFace!");
         try {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            face.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+            face.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byte[] byteArray = stream.toByteArray();
             new Identify(this, new Async.interFace<Double,String>() {
                 @Override
